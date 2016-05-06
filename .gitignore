@@ -1,0 +1,21 @@
+# Visual C++
+*.opensdf
+*.sdf
+*.obj
+*.pdb
+*.idb
+*.ib_pdb_index
+*.tlog
+CH-GMM/x64/
+
+# Qt
+CH-GMM/GeneratedFiles/
+
+# Release
+bin/Release/CH-GMM.exe
+bin/Release/Config.ini
+
+# Debug
+bin/Debug/CH-GMM.exe
+bin/Debug/CH-GMM.ilk
+bin/Debug/Config.ini
