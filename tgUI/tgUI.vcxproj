@@ -311,7 +311,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="CH-GMM.rc" />
+    <ResourceCompile Include="tgUI.rc" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="tgConsole.ui">

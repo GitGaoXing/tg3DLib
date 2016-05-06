@@ -6,16 +6,16 @@
 *.idb
 *.ib_pdb_index
 *.tlog
-CH-GMM/x64/
+tgUI/x64/
 
 # Qt
-CH-GMM/GeneratedFiles/
+tgUI/GeneratedFiles/
 
 # Release
-bin/Release/CH-GMM.exe
+bin/Release/tgUI.exe
 bin/Release/Config.ini
 
 # Debug
-bin/Debug/CH-GMM.exe
-bin/Debug/CH-GMM.ilk
+bin/Debug/tgUI.exe
+bin/Debug/tgUI.ilk
 bin/Debug/Config.ini
