@@ -1,7 +1,6 @@
 # Visual C++
 *.opensdf
 *.sdf
-*.suo
 *.obj
 *.pdb
 *.idb
@@ -9,7 +8,7 @@
 *.tlog
 tgUI/x64/
 tgCore/x64/
-
+tg3DLib.v12.suo
 
 # Qt
 tgUI/GeneratedFiles/
