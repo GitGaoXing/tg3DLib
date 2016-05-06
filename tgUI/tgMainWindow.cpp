@@ -28,8 +28,8 @@ tgMainWindow::~tgMainWindow()
 void tgMainWindow::Init()
 {
 	m_vReceiver = this;
-	tg::Core::DockCallbackDumpLog(tgMainWindow::staticDumpLog);
-	tg::Core::DockCallbackUpdateProgress(tgMainWindow::staticUpdateProgress);
+	tg::Core::LogProgress::DockCallbackDumpLog(tgMainWindow::staticDumpLog);
+	tg::Core::LogProgress::DockCallbackUpdateProgress(tgMainWindow::staticUpdateProgress);
 
 	tg::CallbackUI::DockCallbackUpdateUI(tgMainWindow::staticUpdateUI);
 
@@ -120,18 +120,18 @@ void tgMainWindow::slotAddSource()
 	QString l_strFileNameQt;
 	l_strFileNameQt = QFileDialog::getOpenFileName(	this,
 													tr("Add Source"),
-													QString::fromLocal8Bit(tg::Param::Instance()->Get("Path.AddSource.String", std::string("")).toString().c_str()),
+													QString::fromLocal8Bit(tg::Core::GetParam("Path.AddSource.String", std::string("")).toString().c_str()),
 													tr("PLY( *.ply )"));
 
 	if(l_strFileNameQt.size() == 0)
 		return;
 
-	tg::Param::Instance()->Set("Path.AddSource.String", std::string(l_strFileNameQt.toLocal8Bit()));
+	tg::Core::SetParam("Path.AddSource.String", std::string(l_strFileNameQt.toLocal8Bit()));
 	tg::Core::signDumpLog(tg::Core::Normal, true, "Adding Source...");
 
 	////////////////////////////////////////////////
 	std::shared_ptr<tg::MeshIO> l_oTask(new tg::MeshIO);
-	l_oTask->SetInput(tg::Param::Instance()->Get("Path.AddSource.String", std::string("")).toString().c_str());
+	l_oTask->SetInput(tg::Core::GetParam("Path.AddSource.String", std::string("")).toString().c_str());
 	l_oTask->SetOutput(&tg::Data::Instance()->m_oMeshSource);
 	std::shared_ptr<tg::LockUI4Add> l_oPreCallback(new tg::LockUI4Add);
 	l_oTask->SetPreCallback(l_oPreCallback);
@@ -148,18 +148,18 @@ void tgMainWindow::slotAddTarget()
 	QString l_strFileNameQt;
 	l_strFileNameQt = QFileDialog::getOpenFileName(	this,
 													tr("Add Target"),
-													QString::fromLocal8Bit(tg::Param::Instance()->Get("Path.AddTarget.String", std::string("")).toString().c_str()),
+													QString::fromLocal8Bit(tg::Core::GetParam("Path.AddTarget.String", std::string("")).toString().c_str()),
 													tr("PLY( *.ply )"));
 
 	if(l_strFileNameQt.size() == 0)
 		return;
 
-	tg::Param::Instance()->Set("Path.AddTarget.String", std::string(l_strFileNameQt.toLocal8Bit()));
+	tg::Core::SetParam("Path.AddTarget.String", std::string(l_strFileNameQt.toLocal8Bit()));
 	tg::Core::signDumpLog(tg::Core::Normal, true, "Adding Target...");
 
 	////////////////////////////////////////////////
 	std::shared_ptr<tg::MeshIO> l_oTask(new tg::MeshIO);
-	l_oTask->SetInput(tg::Param::Instance()->Get("Path.AddTarget.String", std::string("")).toString().c_str());
+	l_oTask->SetInput(tg::Core::GetParam("Path.AddTarget.String", std::string("")).toString().c_str());
 	l_oTask->SetOutput(&tg::Data::Instance()->m_oMeshTarget);
 	std::shared_ptr<tg::LockUI4Add> l_oPreCallback(new tg::LockUI4Add);
 	l_oTask->SetPreCallback(l_oPreCallback);
@@ -236,12 +236,12 @@ void tgMainWindow::slotFinished(const bool& i_bUpdateScene)
 	}
 }
 
-void tgMainWindow::staticDumpLog(	const int&			i_nType		,
-									const bool&			i_bCreate	,
-									const std::string&	i_strLog	)
+void tgMainWindow::staticDumpLog(	const tg::Core::LogType&	i_eType		,
+									const bool&					i_bCreate	,
+									const std::string&			i_strLog	)
 {
 	tgMainWindow *l_oReceiver = (tgMainWindow *)m_vReceiver;
-	l_oReceiver->signAddLogItem(i_nType, i_bCreate, QString::fromLocal8Bit(i_strLog.c_str()));
+	l_oReceiver->signAddLogItem(i_eType, i_bCreate, QString::fromLocal8Bit(i_strLog.c_str()));
 }
 
 void tgMainWindow::staticUpdateProgress(const int&		i_nProgress)
@@ -271,8 +271,8 @@ void tgMainWindow::LoadSettings()
 	restoreGeometry(l_oSettings.value("Geometry").toByteArray());
 	restoreState(l_oSettings.value("State").toByteArray());
 
-	tg::Param::Instance()->Set("Path.AddSource.String", std::string(l_oSettings.value("Path.AddSource.String", "").toString().toLocal8Bit()));
-	tg::Param::Instance()->Set("Path.AddTarget.String", std::string(l_oSettings.value("Path.AddTarget.String", "").toString().toLocal8Bit()));
+	tg::Core::SetParam("Path.AddSource.String", std::string(l_oSettings.value("Path.AddSource.String", "").toString().toLocal8Bit()));
+	tg::Core::SetParam("Path.AddTarget.String", std::string(l_oSettings.value("Path.AddTarget.String", "").toString().toLocal8Bit()));
 
 	l_oSettings.endGroup();
 }
@@ -286,8 +286,8 @@ void tgMainWindow::SaveSettings()
 	l_oSettings.setValue("Geometry", saveGeometry());
 	l_oSettings.setValue("State", saveState());
 
-	l_oSettings.setValue("Path.AddSource.String", QString::fromLocal8Bit(tg::Param::Instance()->Get("Path.AddSource.String", std::string("")).toString().c_str()));
-	l_oSettings.setValue("Path.AddTarget.String", QString::fromLocal8Bit(tg::Param::Instance()->Get("Path.AddTarget.String", std::string("")).toString().c_str()));
+	l_oSettings.setValue("Path.AddSource.String", QString::fromLocal8Bit(tg::Core::GetParam("Path.AddSource.String", std::string("")).toString().c_str()));
+	l_oSettings.setValue("Path.AddTarget.String", QString::fromLocal8Bit(tg::Core::GetParam("Path.AddTarget.String", std::string("")).toString().c_str()));
 
 	l_oSettings.endGroup();
 }

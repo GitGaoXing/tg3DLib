@@ -65,9 +65,9 @@ private:
 
 	static void* m_vReceiver;
 
-	static void staticDumpLog(		const int&			i_nType		,
-									const bool&			i_bCreate	,
-									const std::string&	i_strLog	);
+	static void staticDumpLog(		const tg::Core::LogType&	i_eType		,
+									const bool&					i_bCreate	,
+									const std::string&			i_strLog	);
 
 	static void staticUpdateProgress(const int&		i_nProgress);
 
