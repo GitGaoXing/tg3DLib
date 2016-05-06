@@ -7,6 +7,7 @@
 *.ib_pdb_index
 *.tlog
 tgUI/x64/
+tgCore/x64/
 
 # Qt
 tgUI/GeneratedFiles/
@@ -14,8 +15,17 @@ tgUI/GeneratedFiles/
 # Release
 bin/Release/tgUI.exe
 bin/Release/Config.ini
+bin/Release/tgCore.dll
+
+lib/Release/tgCore.lib
+lib/Release/tgCore.exp
 
 # Debug
-bin/Debug/tgUI.exe
-bin/Debug/tgUI.ilk
+bin/Debug/tgUI_d.exe
+bin/Debug/tgUI_d.ilk
 bin/Debug/Config.ini
+bin/Debug/tgCore_d.dll
+bin/Debug/tgCore_d.ilk
+
+lib/Debug/tgCore_d.lib
+lib/Debug/tgCore_d.exp

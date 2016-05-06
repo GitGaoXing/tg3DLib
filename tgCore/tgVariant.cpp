@@ -4,6 +4,8 @@
 
 namespace tg
 {
+namespace Core
+{
 
 Variant::Variant() : m_strValue(""), m_sLength(0)
 {
@@ -100,12 +102,12 @@ const char* Variant::toByteArray(const int& i_nSize) const
 	static char l_cTmp[MAX_PARAM_LENGTH];
 	if(i_nSize == -1)
 	{
-		this->m_strValue.copy(l_cTmp, this->m_sLength, 0);
+		this->m_strValue._Copy_s(l_cTmp, MAX_PARAM_LENGTH, this->m_sLength, std::string::size_type(0));
 	}
 	else
 	{
-		int l_nTmp = i_nSize < this->m_sLength? i_nSize : this->m_sLength;
-		this->m_strValue.copy(l_cTmp, l_nTmp, 0);
+		std::string::size_type l_sTmp = i_nSize < this->m_sLength? i_nSize : this->m_sLength;
+		this->m_strValue._Copy_s(l_cTmp, MAX_PARAM_LENGTH, l_sTmp, std::string::size_type(0));
 	}
 	return l_cTmp;
 }
@@ -191,4 +193,4 @@ size_t Variant::GetLength()
 }
 
 };
-
+};

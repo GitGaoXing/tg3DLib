@@ -2,7 +2,6 @@
 #define ___tgTask___
 
 #include "tgCore.h"
-#include "tgParam.h"
 #include "tgData.h"
 #include <memory>
 

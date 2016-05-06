@@ -71,15 +71,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_tgConsole.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="tgCore.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="tgParam.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="tgVariant.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
     <ClCompile Include="tgTask.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
@@ -161,15 +152,6 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_tgConsole.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="tgCore.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="tgParam.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="tgVariant.h">
-      <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="tgTask.h">
       <Filter>Header Files\Core</Filter>

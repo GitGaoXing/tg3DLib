@@ -25,7 +25,7 @@ Task::TG_STAT MeshIO::RunAlg()
 		return Task::Error;
 	}
 
-	if(CMesh::OpenPly(*this->m_oMesh, this->m_strPath.c_str(), tg::Core::CallbackVCG))
+	if(CMesh::OpenPly(*this->m_oMesh, this->m_strPath.c_str(), tg::Core::LogProgress::CallbackVCG))
 	{
 		return Task::Error;
 	}

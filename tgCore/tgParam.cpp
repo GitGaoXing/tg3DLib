@@ -1,7 +1,10 @@
 #include "tgParam.h"
 #include <assert.h>
+#include <Windows.h>
 
 namespace tg
+{
+namespace Core
 {
 Param::ObjectCreator Param::m_stuObjectCreator;
 
@@ -11,9 +14,9 @@ Param* Param::Instance()
 	return &l_oParam;
 }
 
-Param::Param()
+Param::Param() : m_strVersion("20160506-NIGHTLY")
 {
-
+	
 }
 
 Param::~Param()
@@ -21,14 +24,14 @@ Param::~Param()
 
 }
 
-void Param::Set(const std::string& i_strKey,
-				const tg::Variant& i_oValue)
+void Param::Set(const std::string&	i_strKey,
+				const Variant&		i_oValue)
 {
 	this->m_oUnorderedMap[i_strKey] = i_oValue;
 }
 	
-tg::Variant Param::Get(	const std::string& i_strKey,
-						const tg::Variant& i_oValue)
+Variant Param::Get(	const std::string&	i_strKey,
+					const Variant&		i_oValue)
 {
 	auto l_oOutput = i_oValue;
 	auto iterator = this->m_oUnorderedMap.find(i_strKey);
@@ -125,8 +128,48 @@ void Param::Deserialization(const std::vector<char>& i_lstArchive)
 	assert(i_lstArchive.size() == l_nCount);
 }
 
+std::string Param::GetVersion()
+{
+	return this->m_strVersion;
 }
 
+/////////////////////////////////////////////////////////////
+// Exe dir
+std::string Param::GetExeDir()
+{
+	char l_cPath[MAX_PATH];
+	GetModuleFileNameA(NULL, l_cPath, MAX_PATH);
+	std::string l_strPath = l_cPath;
+	l_strPath = l_strPath.substr(0, l_strPath.find_last_of("/\\") + 1);
+	return l_strPath;
+}
+
+void SetParam(	const std::string&	i_strKey,
+				const Variant&		i_oValue)
+{
+	Param::Instance()->Set(i_strKey, i_oValue);
+}
+	
+Variant GetParam(	const std::string&	i_strKey,
+					const Variant&		i_oValue)
+{
+	return Param::Instance()->Get(i_strKey, i_oValue);
+}
+
+// Version
+std::string GetVersion()
+{
+	return Param::Instance()->GetVersion();
+}
+
+// exe dir
+std::string GetExeDir()
+{
+	return Param::Instance()->GetExeDir();
+}
+
+}
+}
 #if(0)
 /////////////////////////////////////////////////////////
 // test for set get
